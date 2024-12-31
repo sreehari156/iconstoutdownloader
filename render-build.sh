@@ -17,4 +17,4 @@ apt-get update && apt-get install -y \
   libfontconfig1
 
 # Install Playwright browsers
-npx playwright install
+npx playwright install --with-deps
