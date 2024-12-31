@@ -18,3 +18,4 @@ apt-get update && apt-get install -y \
 
 # Install Playwright browsers
 npx playwright install --with-deps
+npm install
