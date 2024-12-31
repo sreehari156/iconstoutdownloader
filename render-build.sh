@@ -1,21 +1,13 @@
 #!/usr/bin/env bash
-# Install system dependencies for Playwright
-apt-get update && apt-get install -y \
-  libnss3 \
-  libatk1.0-0 \
-  libatk-bridge2.0-0 \
-  libcups2 \
-  libdrm2 \
-  libxrandr2 \
-  libxdamage1 \
-  libxcomposite1 \
-  libxkbcommon0 \
-  libxshmfence1 \
-  libgbm1 \
-  libasound2 \
-  fonts-liberation \
-  libfontconfig1
 
-# Install Playwright browsers
+# Set the path to where Playwright will install browsers
+export PLAYWRIGHT_BROWSERS_PATH=/opt/render/.cache/ms-playwright  # Adjust this if necessary
+
+# Ensure no download of browsers if you already have them available
+export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+
+# Install Playwright and necessary browsers
 npx playwright install --with-deps
+
+# Install other dependencies
 npm install
