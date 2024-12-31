@@ -5,7 +5,6 @@ const app = express();
 app.use(express.json()); // Middleware to parse JSON body
 
 // POST API to extract ID from the second URL
-
 app.post('/', async (req, res) => {
   const { website_url } = req.body; // Extract website_url from the request body
 
@@ -16,8 +15,14 @@ app.post('/', async (req, res) => {
   let browser; // Declare browser variable outside the try block
 
   try {
+    // Log the environment variable for debugging
+    console.log('Chromium executable path:', process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH);
+
     // Launch browser
-    browser = await chromium.launch({ headless: true ,executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH});
+    browser = await chromium.launch({
+      headless: true,
+      executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || undefined, // Fallback to default if not set
+    });
     const page = await browser.newPage();
 
     // Navigate to the provided website URL
@@ -67,4 +72,4 @@ app.post('/', async (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-}); 
+});
